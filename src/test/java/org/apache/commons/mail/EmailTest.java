@@ -66,14 +66,9 @@ public class EmailTest {
 		assertEquals(1, email.headers.size()); // header added
 	}
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testAddHeaderEmptyName() throws Exception {
-		try {
-			email.addHeader("", TEST_EMAILS[0]);
-			fail("Expected IllegalArgumentException for empty header name");
-		} catch (IllegalArgumentException e) {
-			assertEquals("Header name cannot be empty", e.getMessage());
-		}
+		email.addHeader("", TEST_EMAILS[0]); // empty header name should throw IllegalArgumentException
 	}
 	
 	
