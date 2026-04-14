@@ -68,8 +68,12 @@ public class EmailTest {
 	
 	@Test
 	public void testAddHeaderEmptyName() throws Exception {
-		email.addHeader("", TEST_EMAILS[0]); // empty name should still add header safely
-		assertEquals(1, email.headers.size());
+		try {
+			email.addHeader("", TEST_EMAILS[0]);
+			fail("Expected IllegalArgumentException for empty header name");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Header name cannot be empty", e.getMessage());
+		}
 	}
 	
 	
